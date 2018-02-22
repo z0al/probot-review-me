@@ -1,5 +1,5 @@
 // Packages
-const { loadConfig } = require('./config')
+const { loadConfig } = require('../lib/config')
 
 // Mock Robot Context
 let ctx
