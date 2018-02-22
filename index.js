@@ -1,10 +1,22 @@
-module.exports = robot => {
-  // Your code here
-  robot.log('Yay, the app was loaded!')
+// Packages
+const { loadConfig } = require('./lib/config')
+const { handle } = require('./lib/handle')
 
-  // For more information on building apps:
-  // https://probot.github.io/docs/
+/**
+ * App starting point
+ *
+ * @param {Robot} robot
+ */
+const app = robot => {
+  robot.on('status', async ctx => {
+    // Load config from GitHub
+    const config = await loadConfig(ctx)
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
+    // Invalid config?
+    if (!config) return
+
+    return handle(ctx, config)
+  })
 }
+
+module.exports = app
