@@ -1,31 +1,33 @@
 {
-	"name": "review-me",
-	"version": "1.0.0",
-	"description": "",
-	"author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
-	"license": "MIT",
-	"repository": "https://github.com/ahmed-taj/review-me.git",
-	"scripts": {
-		"start": "probot run ./index.js",
-		"precommit": "lint-staged",
-		"test": "jest"
-	},
-	"dependencies": {
-		"probot": "^5.0.0"
-	},
-	"devDependencies": {
-		"husky": "^0.14.3",
-		"jest": "^21.2.1",
-		"lint-staged": "^7.0.0",
-		"prettier-standard": "^8.0.0",
-		"smee-client": "^1.0.1"
-	},
-	"engines": {
-		"node": "8.x",
-		"npm": "5.x"
-	},
-	"lint-staged": {
-		"*.js": ["prettier-standard", "git add"],
-		"*.json": ["prettier --write", "git add"]
-	}
+  "name": "probot-review-me",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/ahmed-taj/probot-review-me.git",
+  "scripts": {
+    "start": "probot run ./index.js",
+    "precommit": "lint-staged",
+    "test": "jest"
+  },
+  "dependencies": {
+    "joi": "^13.1.2",
+    "js-yaml": "^3.10.0",
+    "probot": "^5.0.0"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "lint-staged": "^7.0.0",
+    "prettier-standard": "^8.0.0",
+    "smee-client": "^1.0.1"
+  },
+  "engines": {
+    "node": "8.x",
+    "npm": "5.x"
+  },
+  "lint-staged": {
+    "*.js": ["prettier-standard", "git add"],
+    "*.json": ["prettier --write", "git add"]
+  }
 }
