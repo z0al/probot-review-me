@@ -21,7 +21,7 @@ A `.github/review-me.yml` file is required to enable the app:
 ```yaml
 # List of contexts (i.e. apps) and their corresponding statuses
 when:
-  # Allowed status are:
+  # Allowed statuses are:
   #
   #   - success
   #   - failure
@@ -32,7 +32,7 @@ when:
   dep: failure
 
 # Override default label (optional)
-label: 'Review Me'
+label: Review Me
 ```
 
 ## Why?
@@ -53,9 +53,10 @@ npm start
 
 See [docs/deploy.md](docs/deploy.md) if you would like to run your own instance of this app.
 
-## Like it?
+## You might also like
 
-Give it a star(:star:) :point_up_2:
+* **[commitlint-bot](https://github.com/ahmed-taj/commitlint-bot):** A GitHub App that runs commitlint for you!
+* **[DEP](https://github.com/ahmed-taj/dep):** A Github App that helps managing PR dependencies
 
 ## License
 
