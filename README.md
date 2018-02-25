@@ -4,9 +4,15 @@
 
 A GitHub App built with [probot](https://github.com/probot/probot) that helps you to decide when a pull request is ready for review based on its statuses.
 
+## Why?
+
+It's not always necessary for all status checks to pass, sometimes we need more than ✕ or ✓ to determine if a pull request is ready for review or not.
+
 ## How it works
 
-The app listens to pull request statuses and adds a review label (`Review me` by default) if all statuses matched. Otherwise, it removes the label.
+The app listens to pull request statuses and adds a review label (`[Review me]` by default) if all statuses matched. Otherwise, it removes the label.
+
+![screenshot](./docs/screenshot.png)
 
 That way, maintainers/reviewers can filter pull requests to look only into ready ones.
 
@@ -28,16 +34,11 @@ when:
   #   - pending
   #   - error
   continuous-integration/travis-ci/pr: success
-  wip: pending
-  dep: failure
+  wip: success
 
 # Override default label (optional)
 label: Review Me
 ```
-
-## Why?
-
-I built this app as a possible solution to [this issue](https://github.com/ahmed-taj/dep/issues/13). In general, I believe it could help maintainers to decide exactly when they need to review a pull request.
 
 ## Development
 
