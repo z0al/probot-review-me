@@ -1,37 +1,42 @@
 {
-  "name": "probot-review-me",
-  "version": "1.0.0",
-  "description":
-    "Decide when a pull request is ready for review based on its statuses",
-  "author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
-  "license": "MIT",
-  "repository": "https://github.com/ahmed-taj/probot-review-me.git",
-  "scripts": {
-    "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
-    "start": "probot run ./index.js",
-    "precommit": "lint-staged",
-    "test": "jest"
-  },
-  "dependencies": {
-    "joi": "^13.1.2",
-    "probot": "^5.0.0"
-  },
-  "devDependencies": {
-    "husky": "^0.14.3",
-    "jest": "^21.2.1",
-    "lint-staged": "^7.0.0",
-    "prettier-standard": "^8.0.0",
-    "smee-client": "^1.0.1"
-  },
-  "engines": {
-    "node": "8.x",
-    "npm": "5.x"
-  },
-  "lint-staged": {
-    "*.js": ["prettier-standard", "git add"],
-    "*.json": ["prettier --write", "git add"]
-  },
-  "jest": {
-    "testEnvironment": "node"
-  }
+	"name": "probot-review-me",
+	"version": "1.0.0",
+	"description": "Decide when a pull request is ready for review based on its statuses",
+	"author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
+	"license": "MIT",
+	"repository": "https://github.com/z0al/probot-review-me.git",
+	"scripts": {
+		"now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY | base64 -d) npm start",
+		"start": "probot run ./index.js",
+		"precommit": "lint-staged",
+		"test": "jest"
+	},
+	"dependencies": {
+		"joi": "^13.1.2",
+		"probot": "^7.0.1"
+	},
+	"devDependencies": {
+		"husky": "^0.14.3",
+		"jest": "^23.5.0",
+		"lint-staged": "^7.0.0",
+		"prettier-standard": "^8.0.0",
+		"smee-client": "^1.0.2"
+	},
+	"engines": {
+		"node": "10.x",
+		"npm": "6.x"
+	},
+	"lint-staged": {
+		"*.js": [
+			"prettier-standard",
+			"git add"
+		],
+		"*.json": [
+			"prettier --write",
+			"git add"
+		]
+	},
+	"jest": {
+		"testEnvironment": "node"
+	}
 }
