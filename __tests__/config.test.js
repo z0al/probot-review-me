@@ -11,7 +11,6 @@ beforeAll(() => {
     config: jest
       .fn()
       .mockReturnValueOnce({})
-      .mockReturnValueOnce({ when: { travis: 'success' } })
       .mockReturnValue({
         when: {
           travis: 'success',
@@ -28,17 +27,12 @@ test('Returns `null` when errors occur', async () => {
   expect(config).toBe(null)
 })
 
-test('Set default label', async () => {
-  const config = await loadConfig(ctx)
-  expect(ctx.config).toBeCalled()
-  expect(config.label).toEqual('Review Me')
-})
-
 test('Get file content via GitHub API', async () => {
   const config = await loadConfig(ctx)
   expect(ctx.config).toBeCalled()
-  expect(config).toEqual({
-    when: { travis: 'success', wip: 'success' },
-    label: 'ready-for-review'
-  })
+  expect(config).toEqual(
+    expect.objectContaining({
+      label: 'ready-for-review'
+    })
+  )
 })

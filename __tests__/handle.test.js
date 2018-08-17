@@ -1,5 +1,5 @@
 // Packages
-const { execute, handle } = require('../lib/handle')
+const { execute, run } = require('../lib/handle')
 
 // Mock Robot Context
 let ctx
@@ -11,7 +11,7 @@ beforeEach(() => {
     log: { info: jest.fn(), warn: jest.fn() },
     github: {
       issues: {
-        addLabels: jest.fn(),
+        replaceAllLabels: jest.fn(),
         removeLabel: jest.fn()
       },
       pullRequests: {
@@ -33,10 +33,14 @@ beforeEach(() => {
 })
 
 describe('execute', () => {
-  const pull = { number: 1, head: { sha: 'abcdefg' } }
+  const pull = {
+    number: 1,
+    head: { sha: 'abcdefg' },
+    labels: [{ name: 'Something' }]
+  }
 
   test('Fetchs all PR statuses', async () => {
-    await execute(ctx, pull, { when: {} })
+    await execute(ctx, pull, { when: {}, remove: [] })
     expect(ctx.github.repos.getStatuses).toBeCalledWith(
       expect.objectContaining({
         ref: pull.head.sha
@@ -45,27 +49,41 @@ describe('execute', () => {
   })
 
   test('Adds the label if all conditions pass', async () => {
-    await execute(ctx, pull, { when: { travis: 'success', dep: 'success' } })
-    expect(ctx.github.issues.addLabels).toBeCalled()
+    await execute(ctx, pull, {
+      when: { travis: 'success', dep: 'success' },
+      remove: []
+    })
+    expect(ctx.github.issues.replaceAllLabels).toBeCalled()
     expect(ctx.github.issues.removeLabel).not.toBeCalled()
   })
 
   test('Removes the label if a condition fails', async () => {
-    await execute(ctx, pull, { when: { travis: 'success', dep: 'pending' } })
+    await execute(ctx, pull, {
+      when: { travis: 'success', dep: 'pending' },
+      remove: []
+    })
     expect(ctx.github.issues.removeLabel).toBeCalled()
-    expect(ctx.github.issues.addLabels).not.toBeCalled()
+    expect(ctx.github.issues.replaceAllLabels).not.toBeCalled()
   })
 
   test('Uses the label from the configs if specified', async () => {
     // addLabels
-    await execute(ctx, pull, { when: { travis: 'success' }, label: 'my-label' })
+    await execute(ctx, pull, {
+      when: { travis: 'success' },
+      label: 'my-label',
+      remove: []
+    })
 
-    expect(ctx.github.issues.addLabels).toBeCalledWith(
-      expect.objectContaining({ labels: ['my-label'] })
+    expect(ctx.github.issues.replaceAllLabels).toBeCalledWith(
+      expect.objectContaining({ labels: ['my-label', 'Something'] })
     )
 
     // removeLabel
-    await execute(ctx, pull, { when: { travis: 'failure' }, label: 'label2' })
+    await execute(ctx, pull, {
+      when: { travis: 'failure' },
+      label: 'label2',
+      remove: []
+    })
 
     expect(ctx.github.issues.removeLabel).toBeCalledWith(
       expect.objectContaining({ name: 'label2' })
@@ -73,9 +91,9 @@ describe('execute', () => {
   })
 })
 
-describe('handle', () => {
+describe('run', () => {
   test('paginates all open PRs', async () => {
-    await handle(ctx, { when: { travis: 'success' } })
+    await run(ctx, { when: { travis: 'success' } })
     expect(ctx.github.paginate).toBeCalled()
     expect(ctx.github.pullRequests.getAll).toBeCalledWith(
       expect.objectContaining({ state: 'open' })

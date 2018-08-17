@@ -1,6 +1,6 @@
 # Review Me
 
-[![Travis](https://img.shields.io/travis/ahmed-taj/probot-review-me.svg)](https://travis-ci.org/ahmed-taj/probot-review-me)
+[![Travis](https://img.shields.io/travis/z0al/probot-review-me.svg)](https://travis-ci.org/z0al/probot-review-me)
 
 A GitHub App built with [probot](https://github.com/probot/probot) that helps you to decide when a pull request is ready for review based on its statuses.
 
@@ -36,8 +36,12 @@ when:
   continuous-integration/travis-ci/pr: success
   wip: success
 
-# Override default label (optional)
+# The label to add
 label: Review Me
+
+# The labels to remove
+remove:
+  - Waiting for something
 ```
 
 ## Development
@@ -56,9 +60,9 @@ See [docs/deploy.md](docs/deploy.md) if you would like to run your own instance 
 
 ## You might also like
 
-* **[commitlint-bot](https://github.com/ahmed-taj/commitlint-bot):** A GitHub App that runs commitlint for you!
-* **[DEP](https://github.com/ahmed-taj/dep):** A Github App that helps managing PR dependencies
+- **[commitlint-bot](https://github.com/z0al/commitlint-bot):** A GitHub App that runs commitlint for you!
+- **[DEP](https://github.com/z0al/dep):** A Github App that helps managing PR dependencies
 
 ## License
 
-MIT © [Ahmed T. Ali](https://github.com/ahmed-taj)
+MIT © [Ahmed T. Ali](https://github.com/z0al)
