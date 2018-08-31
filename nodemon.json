@@ -1,0 +1,5 @@
+{
+	"verbose": false,
+	"watch": ["*.js"],
+	"ext": "js"
+}

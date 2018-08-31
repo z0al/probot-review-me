@@ -15,7 +15,7 @@ const app = app => {
     // Invalid config?
     if (!config) return
 
-    // return run(ctx, config);
+    return run(ctx, config)
   })
 }
 

@@ -8,6 +8,9 @@ beforeEach(() => {
   ctx = {
     issue: obj => ({ owner: 'user', repo: 'test', ...obj }),
     repo: obj => ({ owner: 'user', repo: 'test', ...obj }),
+    payload: {
+      sha: 'abcdefg'
+    },
     log: { info: jest.fn(), warn: jest.fn() },
     github: {
       issues: {
