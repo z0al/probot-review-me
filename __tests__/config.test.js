@@ -10,13 +10,17 @@ beforeAll(() => {
     log: { info: jest.fn(), warn: jest.fn() },
     config: jest
       .fn()
-      .mockReturnValueOnce({})
+      .mockReturnValueOnce([])
       .mockReturnValue({
-        when: {
-          travis: 'success',
-          wip: 'success'
-        },
-        label: 'ready-for-review'
+        rules: [
+          {
+            when: {
+              travis: 'success',
+              wip: 'success'
+            },
+            label: 'ready-for-review'
+          }
+        ]
       })
   }
 })
@@ -30,7 +34,7 @@ test('Returns `null` when errors occur', async () => {
 test('Get file content via GitHub API', async () => {
   const config = await loadConfig(ctx)
   expect(ctx.config).toBeCalled()
-  expect(config).toEqual(
+  expect(config[0]).toEqual(
     expect.objectContaining({
       label: 'ready-for-review'
     })
